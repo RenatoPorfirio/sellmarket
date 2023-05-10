@@ -11,9 +11,9 @@ api.get('/', (requisicao, resposta) => {
 //cadastrar fornecedor
 api.post('/cadastro/fornecedor', (requisicao, resposta) => {
   const ip = requisicao.headers['x-forwarded-for'] || requisicao.socket.remoteAddress;
-  let fornecedor = requisicao.body;
-  if(fornecedor === undefined || !fornecedor){
-    console.log(fornecedor);
+  let {email_fornecedor, nome_fornecedor, cnpj} = requisicao.body;
+  if(email_fornecedor === undefined || nome_fornecedor === undefined){
+    console.log(email_fornecedor, nome_fornecedor);
     resposta.send('Campo vazio. Nenhum fornecedor foi cadastrado.');
   }
   else{
