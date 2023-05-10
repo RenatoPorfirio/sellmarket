@@ -8,6 +8,19 @@ api.get('/', (requisicao, resposta) => {
   console.log('<'+ip+'>', requisicao.method, requisicao.url, resposta.statusCode);
 });
 
+//cadastrar fornecedor
+api.post('/cadastro/fornecedor', (requisicao, resposta) => {
+  const ip = requisicao.headers['x-forwarded-for'] || requisicao.socket.remoteAddress;
+  let fornecedor = requisicao.body;
+  if(fornecedor === undefined){
+    reposta.send('Campo vazio. Nenhum fornecedor foi cadastrado.');
+  }
+  else{
+    resposta.send('Fornecedor cadastrado com sucesso!');
+  }
+  console.log('<'+ip+'>', requisicao.method, requisicao.url, resposta.statusCode);
+});
+
 //buscar fornecedor
 api.get('/busca/fornecedor', (requisicao, resposta) => {
   const ip = requisicao.headers['x-forwarded-for'] || requisicao.socket.remoteAddress;
@@ -84,7 +97,7 @@ api.get('/busca/produto', (requisicao, resposta) => {
         console.log('<'+ip+'>', requisicao.method, requisicao.url, resposta.statusCode);
   }
 });
-
+                    
 api.use((requisicao, resposta) => {
   const ip = requisicao.headers['x-forwarded-for'] || requisicao.socket.remoteAddress;
   resposta
