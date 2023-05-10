@@ -13,8 +13,8 @@ api.get('/busca/fornecedor', (requisicao, resposta) => {
   const ip = requisicao.headers['x-forwarded-for'] || requisicao.socket.remoteAddress;
   try{
     let id = requisicao.query.id;
-    if(id === undefined)
-      throw('');
+    if(id === undefined || !id || isNaN(id))
+      id = '0';
     try{
       pool.getConnection((erro, conexao) => {
         console.log('<'+ip+'>', 'Solicitacao de conexao com o banco de dados.');
@@ -51,8 +51,7 @@ api.get('/busca/produto', (requisicao, resposta) => {
   const ip = requisicao.headers['x-forwarded-for'] || requisicao.socket.remoteAddress;
   try{
     let cod = requisicao.query.cod;
-    if(cod === undefined)
-      throw('');
+    if(cod === undefined || !cod || isNaN(cod))
     try{
       pool.getConnection((erro, conexao) => {
         console.log('<'+ip+'>', 'Solicitacao de conexao com o banco de dados.');
