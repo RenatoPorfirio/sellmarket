@@ -12,6 +12,8 @@ api.get('/pesquisa/fornecedor', (requisicao, resposta) => {
   const ip = requisicao.headers['x-forwarded-for'] || requisicao.socket.remoteAddress;
   try{
     let id = requisicao.query.id;
+    if(id === undefined)
+      throw('');
     try{
       pool.getConnection((erro, conexao) => {
         console.log('<'+ip+'>', 'Solicitacao de conexao com o banco de dados.');
