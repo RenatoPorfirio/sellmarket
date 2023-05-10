@@ -51,7 +51,9 @@ api.get('/busca/produto', (requisicao, resposta) => {
   const ip = requisicao.headers['x-forwarded-for'] || requisicao.socket.remoteAddress;
   try{
     let cod = requisicao.query.cod;
-    if(cod === undefined || !cod || isNaN(cod))
+    if(cod === undefined || !cod || isNaN(cod)){
+      cod = '0';
+    }
     try{
       pool.getConnection((erro, conexao) => {
         console.log('<'+ip+'>', 'Solicitacao de conexao com o banco de dados.');
